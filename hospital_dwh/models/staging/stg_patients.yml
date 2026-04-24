@@ -17,11 +17,11 @@ models:
 
       - name: Sexe
         description: >
-          Sexe du patient standardisé en 'Male', 'Female' ou 'Unknown'.
+          Sexe du patient standardisé en 'Homme', 'Femme' ou 'Inconnue'.
         tests:
           - not_null
           - accepted_values:
-              values: ["Male", "Female", "Unknown"]
+              values: ["Homme", "Femme", "Inconnue"]
 
       - name: DateNaissance
         description: "Date de naissance du patient convertie au format DATE."
