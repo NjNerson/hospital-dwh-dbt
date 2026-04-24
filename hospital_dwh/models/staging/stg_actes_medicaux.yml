@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_actes_medicaux
+    description: >
+      Table de staging des actes médicaux réalisés lors des passages aux urgences.
+      Elle nettoie et standardise les identifiants, les types d’actes, les durées
+      estimées et les coûts associés.
+
+    columns:
+      - name: ActeID
+        description: "Identifiant unique de l’acte médical."
+        tests:
+          - not_null
+          - unique
+
+      - name: VisitID
+        description: "Identifiant du passage aux urgences associé à l’acte."
+        tests:
+          - not_null
+
+      - name: TypeActe
+        description: "Type standardisé de l’acte médical réalisé."
+        tests:
+          - not_null
+
+      - name: LibelleActe
+        description: "Libellé détaillé de l’acte médical."
+
+      - name: CoutActe
+        description: "Coût de l’acte médical."
+        tests:
+          - not_null
+
+      - name: DureeEstimeeMin
+        description: "Durée estimée de réalisation de l’acte en minutes."
+        tests:
+          - not_null
