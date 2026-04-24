@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_couts_visite
+    description: >
+      Table de staging des coûts associés à chaque passage aux urgences.
+      Elle convertit les champs numériques issus du fichier brut en types exploitables
+      pour les analyses financières et la construction de la table de faits.
+
+    columns:
+      - name: VisitID
+        description: "Identifiant unique du passage aux urgences."
+        tests:
+          - not_null
+          - unique
+
+      - name: NbActes
+        description: "Nombre d'actes médicaux associés au passage."
+        tests:
+          - not_null
+
+      - name: CoutConsultation
+        description: "Coût de consultation associé au passage."
+        tests:
+          - not_null
+
+      - name: CoutActes
+        description: "Coût total des actes médicaux associés au passage."
+        tests:
+          - not_null
+
+      - name: CoutMedicaments
+        description: "Coût des médicaments associés au passage."
+        tests:
+          - not_null
+
+      - name: CoutTotal
+        description: "Coût total du passage aux urgences."
+        tests:
+          - not_null
