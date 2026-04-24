@@ -5,3 +5,5 @@ dbt_packages/
 .env
 *.json
 profiles.yml
+**/*/*.old
+*.old
