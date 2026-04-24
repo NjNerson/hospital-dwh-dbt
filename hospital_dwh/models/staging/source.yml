@@ -6,7 +6,7 @@ sources:
     schema: raw_hospital
     tables:
       - name: patients
-      - name: visits_urgences
+      - name: visites_urgences
       - name: triage
       - name: services
       - name: actes_medicaux
