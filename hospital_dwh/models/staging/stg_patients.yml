@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_patients
+    description: >
+      Table de staging des patients issue de raw_hospital.patients.
+      Cette table contient des données nettoyées et standardisées
+      (types, valeurs texte, gestion des valeurs manquantes),
+      ainsi que des enrichissements simples comme l’âge et les tranches d’âge.
+
+    columns:
+      - name: PatientID
+        description: "Identifiant unique du patient."
+        tests:
+          - not_null
+          - unique
+
+      - name: Sexe
+        description: >
+          Sexe du patient standardisé en 'Male', 'Female' ou 'Unknown'.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["Male", "Female", "Unknown"]
+
+      - name: DateNaissance
+        description: "Date de naissance du patient convertie au format DATE."
+        tests:
+          - not_null
+
+      - name: Age
+        description: "Âge du patient calculé à partir de la date de naissance."
+
+      - name: TrancheAge
+        description: >
+          Tranche d’âge détaillée (ex: 0-5, 6-17, 18-35, 36-59, 60+).
+
+      - name: GroupeAge
+        description: >
+          Catégorisation simplifiée de l’âge (Enfant, Adulte, Senior).
+        tests:
+          - accepted_values:
+              values: ["Enfant", "Adulte", "Senior"]
+
+      - name: ZoneResidence
+        description: >
+          Zone de résidence du patient.
+          Les valeurs nulles ou vides ont été remplacées par 'Inconnue'.
