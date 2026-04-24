@@ -70,7 +70,7 @@ final as (
 
         ZoneResidence
 
-    from renamed_cleaned
+    from with_age
 
 )
 
