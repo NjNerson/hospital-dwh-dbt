@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_services
+    description: >
+      Table de staging des services hospitaliers.
+      Elle nettoie et standardise le référentiel des services impliqués dans
+      la prise en charge des patients aux urgences.
+
+    columns:
+      - name: ServiceID
+        description: "Identifiant unique du service hospitalier."
+        tests:
+          - not_null
+          - unique
+
+      - name: NomService
+        description: "Nom standardisé du service hospitalier."
+        tests:
+          - not_null
+
+      - name: TypeService
+        description: "Type du service : médical, chirurgical, spécialisé ou soins critiques."
+        tests:
+          - not_null
+
+      - name: NiveauCriticite
+        description: "Niveau de criticité du service."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "Faible"
+                  - "Moyenne"
+                  - "Élevée"
+                  - "Très Élevée"
+
+      - name: CapaciteTheorique
+        description: "Capacité théorique du service en nombre de places ou lits."
+        tests:
+          - not_null
