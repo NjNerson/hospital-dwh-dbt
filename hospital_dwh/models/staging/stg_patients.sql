@@ -1,8 +1,6 @@
 {{ config(materialized='view') }}
 
-with
-
-source as (
+with source as (
 
     select *
     from {{ source('raw_hospital', 'patients') }}
@@ -31,7 +29,7 @@ renamed_cleaned as (
 
 ),
 
-with_age as (
+final as (
 
     select
         PatientID,
@@ -41,36 +39,6 @@ with_age as (
         ZoneResidence
 
     from renamed_cleaned
-
-),
-
-final as (
-
-    select
-        PatientID,
-        Sexe,
-        DateNaissance,
-        Age,
-
-        case
-            when Age between 0 and 5 then '0-5 ans'
-            when Age between 6 and 17 then '6-17 ans'
-            when Age between 18 and 35 then '18-35 ans'
-            when Age between 36 and 59 then '36-59 ans'
-            when Age >= 60 then '60+ ans'
-            else 'Inconnu'
-        end as TrancheAge,
-
-        -- tranche simple
-        case
-            when Age < 18 then 'Enfant'
-            when Age < 60 then 'Adulte'
-            else 'Senior'
-        end as GroupeAge,
-
-        ZoneResidence
-
-    from with_age
 
 )
 
