@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_triage
+    description: >
+      Table de staging du triage médical des passages aux urgences.
+      Elle nettoie les identifiants, standardise le niveau de gravité
+      et convertit les scores et indicateurs médicaux en types numériques.
+
+    columns:
+      - name: TriageID
+        description: "Identifiant unique du triage."
+        tests:
+          - not_null
+          - unique
+
+      - name: VisitID
+        description: "Identifiant du passage aux urgences associé au triage."
+        tests:
+          - not_null
+          - unique
+
+      - name: NiveauGravite
+        description: "Niveau de gravité évalué au triage."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "Mineure"
+                  - "Modérée"
+                  - "Sévère"
+                  - "Critique"
+                  - "Réanimation Immédiate"
+
+      - name: Priorite
+        description: "Priorité médicale associée au niveau de gravité."
+        tests:
+          - not_null
+
+      - name: ScoreTriage
+        description: "Score numérique de triage."
+        tests:
+          - not_null
+
+      - name: OxygeneFlag
+        description: "Indique si un besoin en oxygène est relevé : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+      - name: ConstantesReleveesFlag
+        description: "Indique si les constantes vitales ont été relevées : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
