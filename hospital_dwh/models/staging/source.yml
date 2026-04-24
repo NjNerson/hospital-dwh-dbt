@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_hospital
+    database: hospital-dwh-sid
+    schema: raw_hospital
+    tables:
+      - name: patients
+      - name: visits_urgences
+      - name: triage
+      - name: services
+      - name: actes_medicaux
+      - name: couts_visite
