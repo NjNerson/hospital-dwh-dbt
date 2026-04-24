@@ -15,9 +15,9 @@ renamed_cleaned as (
         cast(patient_id as string) as PatientID,
 
         case
-            when lower(trim(sexe)) in ('m', 'male', 'masculin', 'homme') then 'Male'
-            when lower(trim(sexe)) in ('f', 'female', 'féminin', 'feminin', 'femme') then 'Female'
-            else 'Unknown'
+            when lower(trim(sexe)) in ('m', 'male', 'masculin', 'homme') then 'Homme'
+            when lower(trim(sexe)) in ('f', 'female', 'féminin', 'feminin', 'femme') then 'Femme'
+            else 'Inconnue'
         end as Sexe,
 
         cast(date_naissance as date) as DateNaissance,
