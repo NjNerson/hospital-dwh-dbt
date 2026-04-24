@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  - name: stg_visits
+    description: >
+      Table de staging des passages aux urgences issue de raw_hospital.visites_urgences.
+      Elle nettoie et standardise les informations brutes d'une visite sans appliquer
+      de logique métier avancée. Les segmentations temporelles comme les shifts ou
+      les tranches horaires seront créées plus tard dans la dimension temps.
+
+    columns:
+      - name: VisitID
+        description: "Identifiant unique du passage aux urgences."
+        tests:
+          - not_null
+          - unique
+
+      - name: PatientID
+        description: "Identifiant du patient associé au passage."
+        tests:
+          - not_null
+
+      - name: DateArrivee
+        description: "Date d'arrivée du patient aux urgences."
+        tests:
+          - not_null
+
+      - name: DatetimeArrivee
+        description: "Date et heure complète d'arrivée du patient."
+
+      - name: HeureArrivee
+        description: "Heure exacte d'arrivée du patient."
+        tests:
+          - not_null
+
+      - name: Heure
+        description: "Heure extraite de l'heure d'arrivée, entre 0 et 23."
+        tests:
+          - not_null
+
+      - name: Minute
+        description: "Minute extraite de l'heure d'arrivée."
+
+      - name: ModeArrivee
+        description: "Mode d'arrivée standardisé du patient."
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - "Ambulance"
+                  - "Arrivée spontanée"
+                  - "Transport familial"
+                  - "Référé"
+                  - "Police / Protection civile"
+                  - "Autre"
+
+      - name: MotifAdmission
+        description: "Motif médical d'admission aux urgences."
+
+      - name: ServiceOrientationInitiale
+        description: "Service médical vers lequel le patient a été orienté."
+
+      - name: IssueSortie
+        description: "Issue du passage aux urgences."
+
+      - name: HospitalisationFlag
+        description: "Indique si le passage a conduit à une hospitalisation : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+      - name: TempsAttenteMin
+        description: "Temps d'attente en minutes avant la prise en charge."
+        tests:
+          - not_null
+
+      - name: DureePriseEnChargeMin
+        description: "Durée de prise en charge en minutes."
+        tests:
+          - not_null
+
+      - name: HospitalName
+        description: "Nom de l'hôpital concerné."
