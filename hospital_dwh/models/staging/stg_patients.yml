@@ -21,7 +21,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ["Homme", "Femme", "Inconnue"]
+              arguments:
+                values: ["Homme", "Femme", "Inconnue"]
 
       - name: DateNaissance
         description: "Date de naissance du patient convertie au format DATE."
@@ -40,7 +41,8 @@ models:
           Catégorisation simplifiée de l’âge (Enfant, Adulte, Senior).
         tests:
           - accepted_values:
-              values: ["Enfant", "Adulte", "Senior"]
+              arguments:
+                values: ["Enfant", "Adulte", "Senior"]
 
       - name: ZoneResidence
         description: >
