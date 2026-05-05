@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: dim_patient
+    description: >
+      Dimension patient du modèle étoile. Elle permet d'analyser les passages
+      aux urgences selon les caractéristiques démographiques principales :
+      sexe et groupes d'âge.
+
+    columns:
+      - name: PatientID
+        description: "Identifiant unique du patient."
+        tests:
+          - not_null
+          - unique
+
+      - name: Sexe
+        description: "Sexe du patient standardisé."
+
+      - name: DateNaissance
+        description: "Date de naissance du patient."
+
+      - name: TrancheAge
+        description: "Tranche d'âge détaillée pour l'analyse."
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - "0-5 ans"
+                  - "6-17 ans"
+                  - "18-35 ans"
+                  - "36-59 ans"
+                  - "60+ ans"
+                  - "Inconnu"
+
+      - name: GroupeAge
+        description: "Groupe d'âge simplifié pour les analyses globales."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["Enfant", "Adulte", "Senior", "Inconnu"]
