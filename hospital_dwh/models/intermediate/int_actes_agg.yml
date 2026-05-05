@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: int_actes_agg
+    description: >
+      Modèle intermédiaire qui agrège les actes médicaux par passage aux urgences.
+      Il permet d'obtenir une seule ligne par VisitID afin de préparer les jointures
+      avec les visites et la future table de faits.
+
+    columns:
+      - name: VisitID
+        description: "Identifiant du passage aux urgences."
+        tests:
+          - not_null
+          - unique
+
+      - name: NbActes
+        description: "Nombre total d'actes médicaux réalisés pendant la visite."
+
+      - name: CoutTotalActes
+        description: "Somme des coûts des actes médicaux associés à la visite."
+
+      - name: DureeTotaleActesMin
+        description: "Somme des durées estimées des actes médicaux associés à la visite."
