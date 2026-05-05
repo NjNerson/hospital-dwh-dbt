@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: int_visits_enriched
+    description: >
+      Modèle intermédiaire central qui enrichit chaque passage aux urgences
+      avec les informations patient, triage, service, coûts et actes médicaux.
+      Il prépare la future table de faits FACT_URGENCES.
+
+    columns:
+      - name: VisitID
+        description: "Identifiant unique du passage aux urgences."
+        tests:
+          - not_null
+          - unique
+
+      - name: PatientID
+        description: "Identifiant du patient associé à la visite."
+        tests:
+          - not_null
+
+      - name: ServiceID
+        description: "Identifiant du service hospitalier associé à la visite."
+
+      - name: TriageID
+        description: "Identifiant du triage associé à la visite."
+
+      - name: CoutTotal
+        description: "Coût total du passage aux urgences."
+
+      - name: NbActesCalcule
+        description: "Nombre d'actes calculé depuis la table des actes médicaux."
+
+      - name: NbActesDeclare
+        description: "Nombre d'actes déclaré dans la table des coûts."
