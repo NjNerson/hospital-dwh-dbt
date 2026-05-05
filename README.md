@@ -297,12 +297,14 @@ Ne jamais commiter :
 ### 5. Exécuter le pipeline dbt
 
 ```bash
+cd hospital_dwh_dbt
 dbt build
 ```
 
 ### 6. Générer la documentation dbt
 
 ```bash
+cd hospital_dwh_dbt
 dbt docs generate
 dbt docs serve
 ```
