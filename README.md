@@ -256,8 +256,8 @@ Example:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-repo>
-cd hospital-dwh-dbt
+git clone https://github.com/NjNerson/hospital-dwh.git
+cd hospital-dwh
 ```
 
 ### 2. Create a virtual environment
@@ -276,7 +276,7 @@ pip install -r requirements.txt
 ### 4. Go to the dbt project
 
 ```bash
-cd hospital_dwh
+cd hospital_dwh_dbt
 ```
 
 ### 5. Configure `profiles.yml`
