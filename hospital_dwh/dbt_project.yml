@@ -29,9 +29,6 @@ clean-targets: # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   hospital_dwh:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
     staging:
       +schema: staging_hospital
     intermediate:
