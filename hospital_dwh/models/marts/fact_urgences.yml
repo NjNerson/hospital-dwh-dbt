@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: fact_urgences
+    description: >
+      Table de faits principale du modèle étoile. Chaque ligne représente
+      un passage aux urgences.
+
+    columns:
+      - name: VisitID
+        tests:
+          - not_null
+          - unique
+
+      - name: PatientID
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_patient')
+                field: PatientID
+
+      - name: DateID
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: DateID
+
+      - name: TempsID
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_temps')
+                field: TempsID
+
+      - name: ServiceID
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_service')
+                field: ServiceID
+
+      - name: GraviteID
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_gravite')
+                field: GraviteID
+
+      - name: ModeArriveeID
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_mode_arrivee')
+                field: ModeArriveeID
+
+      - name: IssueID
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_issue')
+                field: IssueID
