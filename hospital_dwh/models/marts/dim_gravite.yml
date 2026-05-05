@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: dim_gravite
+    description: >
+      Dimension gravité du modèle étoile. Elle permet d'analyser les passages
+      aux urgences selon le niveau de gravité évalué lors du triage.
+
+    columns:
+      - name: GraviteID
+        description: "Identifiant du niveau de gravité."
+        tests:
+          - not_null
+          - unique
+
+      - name: NiveauGravite
+        description: "Libellé du niveau de gravité."
+
+      - name: Priorite
+        description: "Priorité médicale associée au niveau de gravité."
+
+      - name: ScoreTriage
+        description: "Score numérique associé au triage."
