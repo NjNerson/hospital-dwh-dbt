@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: >
+      Dimension date du modèle étoile. Elle permet d'analyser les passages
+      aux urgences selon les jours, mois, années, trimestres et week-ends.
+
+    columns:
+      - name: DateID
+        description: "Identifiant unique de la date au format YYYYMMDD."
+        tests:
+          - not_null
+          - unique
+
+      - name: DateComplete
+        description: "Date complète d'arrivée aux urgences."
+        tests:
+          - not_null
+
+      - name: Jour
+        description: "Jour du mois."
+
+      - name: Mois
+        description: "Numéro du mois."
+
+      - name: NomMois
+        description: "Nom du mois."
+
+      - name: Trimestre
+        description: "Trimestre de l'année."
+
+      - name: Annee
+        description: "Année."
+
+      - name: JourSemaine
+        description: "Jour de la semaine."
+
+      - name: WeekendFlag
+        description: "Indique si la date correspond à un week-end."
