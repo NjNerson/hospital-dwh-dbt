@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_issue
+    description: >
+      Dimension issue du passage aux urgences. Elle permet d'analyser le devenir
+      des patients après leur prise en charge : retour à domicile, hospitalisation,
+      transfert ou autre issue.
+
+    columns:
+      - name: IssueID
+        description: "Identifiant stable généré à partir du libellé de l'issue."
+        tests:
+          - not_null
+          - unique
+
+      - name: LabelIssue
+        description: "Libellé métier de l'issue de sortie."
+        tests:
+          - not_null
+
+      - name: HospitalisationFlag
+        description: "Indique si l'issue correspond à une hospitalisation : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
