@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_service
+    description: >
+      Dimension des services hospitaliers. Elle permet d'analyser les passages
+      aux urgences selon le type de service, le niveau de criticité et la capacité.
+
+    columns:
+      - name: ServiceID
+        description: "Identifiant unique du service."
+        tests:
+          - not_null
+          - unique
+
+      - name: NomService
+        description: "Nom du service hospitalier."
+        tests:
+          - not_null
+
+      - name: TypeService
+        description: "Type du service : médical, chirurgical, spécialisé..."
+
+      - name: NiveauCriticite
+        description: "Niveau de criticité du service."
+
+      - name: CapaciteTheorique
+        description: "Capacité théorique du service."
