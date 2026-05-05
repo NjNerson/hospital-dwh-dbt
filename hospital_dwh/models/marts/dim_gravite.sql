@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
 select distinct
-    NiveauGravite as GraviteID,
+    to_hex(md5(NiveauGravite)) as GraviteID,
     NiveauGravite,
     Priorite,
     ScoreTriage

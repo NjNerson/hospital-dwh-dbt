@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
 select distinct
-    format('%02d%02d', Heure, Minute) as TempsID,
+    to_hex(md5(format('%02d%02d', Heure, Minute))) as TempsID,
     Heure,
     Minute,
 

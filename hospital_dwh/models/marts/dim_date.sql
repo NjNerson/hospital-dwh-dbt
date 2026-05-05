@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
 select distinct
-    format_date('%Y%m%d', DateArrivee) as DateID,
+    to_hex(md5(format_date('%Y%m%d', DateArrivee))) as DateID,
     DateArrivee as DateComplete,
 
     extract(day from DateArrivee) as Jour,
