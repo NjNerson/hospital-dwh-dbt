@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_mode_arrivee
+    description: >
+      Dimension du mode d'arrivée des patients aux urgences.
+      Elle permet d'analyser les passages selon le mode d'accès :
+      ambulance, arrivée spontanée, référé, transport familial ou autre.
+      L'identifiant est généré par hash afin de rester stable et extensible
+      même si de nouveaux modes d'arrivée apparaissent.
+
+    columns:
+      - name: ModeArriveeID
+        description: "Identifiant stable généré à partir du libellé du mode d'arrivée."
+        tests:
+          - not_null
+          - unique
+
+      - name: LabelModeArrivee
+        description: "Libellé métier du mode d'arrivée."
+        tests:
+          - not_null
