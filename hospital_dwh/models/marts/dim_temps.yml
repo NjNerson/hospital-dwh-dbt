@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: dim_temps
+    description: >
+      Dimension temps du modèle étoile. Elle permet d'analyser les passages
+      aux urgences selon l'heure d'arrivée, la tranche horaire et le shift.
+
+    columns:
+      - name: TempsID
+        description: "Identifiant unique du temps au format HHMM."
+        tests:
+          - not_null
+          - unique
+
+      - name: Heure
+        description: "Heure d'arrivée extraite de l'heure complète."
+
+      - name: Minute
+        description: "Minute d'arrivée extraite de l'heure complète."
+
+      - name: TrancheHoraire
+        description: "Bloc horaire utilisé pour regrouper les arrivées."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["00h-05h", "06h-11h", "12h-17h", "18h-23h", "Inconnu"]
+
+      - name: Shift
+        description: "Période opérationnelle de la journée."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["Matin", "Après-midi", "Nuit"]
