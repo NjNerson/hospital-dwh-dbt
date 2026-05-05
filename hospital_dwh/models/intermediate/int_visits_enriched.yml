@@ -5,7 +5,8 @@ models:
     description: >
       Modèle intermédiaire central qui enrichit chaque passage aux urgences
       avec les informations patient, triage, service, coûts et actes médicaux.
-      Il prépare la future table de faits FACT_URGENCES.
+      Il conserve une granularité d'une ligne par visite et prépare la future
+      table de faits du modèle analytique.
 
     columns:
       - name: VisitID
@@ -19,17 +20,85 @@ models:
         tests:
           - not_null
 
+      - name: DateArrivee
+        description: "Date d'arrivée du patient aux urgences."
+        tests:
+          - not_null
+
+      - name: HeureArrivee
+        description: "Heure d'arrivée du patient aux urgences."
+
+      - name: ModeArrivee
+        description: "Mode d'arrivée standardisé du patient."
+
       - name: ServiceID
         description: "Identifiant du service hospitalier associé à la visite."
+        tests:
+          - not_null
 
       - name: TriageID
         description: "Identifiant du triage associé à la visite."
+        tests:
+          - not_null
+
+      - name: NiveauGravite
+        description: "Niveau de gravité issu du triage."
+        tests:
+          - not_null
 
       - name: CoutTotal
         description: "Coût total du passage aux urgences."
+        tests:
+          - not_null
+
+      - name: NbActesDeclare
+        description: "Nombre d'actes déclaré dans la table des coûts."
 
       - name: NbActesCalcule
         description: "Nombre d'actes calculé depuis la table des actes médicaux."
 
-      - name: NbActesDeclare
-        description: "Nombre d'actes déclaré dans la table des coûts."
+      - name: CoutTotalActes
+        description: "Coût total des actes médicaux calculé depuis les actes."
+
+      - name: DureeTotaleActesMin
+        description: "Durée totale estimée des actes médicaux."
+
+      - name: PatientMissingFlag
+        description: "Indique si les informations patient sont absentes : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+      - name: TriageMissingFlag
+        description: "Indique si les informations de triage sont absentes : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+      - name: ServiceMissingFlag
+        description: "Indique si le service n'a pas pu être associé : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+      - name: CoutMissingFlag
+        description: "Indique si les informations de coût sont absentes : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+      - name: ActesMissingFlag
+        description: "Indique si aucun acte médical n'a été trouvé pour la visite : 1 oui, 0 non."
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
